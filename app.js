@@ -1,6 +1,7 @@
 
 const path = require('path');
 const express = require('express');
+const DATABASE_URL = require('dotenv').env('local');
 
 const PORT = process.env.PORT || 5000;
 

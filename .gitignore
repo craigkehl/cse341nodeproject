@@ -119,3 +119,4 @@ dist
 
 scratch.sql
 HerokuNode.code-workspace
+.env.local
