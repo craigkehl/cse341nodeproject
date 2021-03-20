@@ -1,5 +1,5 @@
 
-const DATABASE_URL = require('dotenv');
+const DATABASE_URL = require('dotenv').config();
 
 const { Pool, Client } = require('pg');
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0; 
