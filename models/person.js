@@ -19,7 +19,19 @@ module.exports = class Person {
     // save method
     save() {
         const query = {
-            text: 'INSERT INTO persons(fname, lname, gender, birthday, mobile, email, password, access, id) VALUES($1, $2, $3, $4, $5, $6, $7, $8)',
+            text: 'INSERT INTO persons(fname, lname, gender, birthday, mobile, email, password, access) VALUES($1, $2, $3, $4, $5, $6, $7, $8)',
+            values: [this.fname, this.lname, this.gender, this.birthday, this.mobile, this.email, this.password, this.access]
+          }
+          // promise
+          db
+            .query(query)
+            .then(res => console.log(res.rows[0]))
+            .catch(e => console.error(e.stack))
+      }
+    // save method
+    static savePerson(fname, lname, gender, birthday, mobile, email, password, access) {
+        const query = {
+            text: 'INSERT INTO persons(fname, lname, gender, birthday, mobile, email, password, access) VALUES($1, $2, $3, $4, $5, $6, $7, $8)',
             values: [fname, lname, gender, birthday, mobile, email, password, access]
           }
           // promise

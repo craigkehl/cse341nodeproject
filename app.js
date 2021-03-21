@@ -3,7 +3,7 @@ const path = require('path');
 const express = require('express');
 const DATABASE_URL = require('dotenv').config();
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5050;
 
 const app = express();
 
@@ -22,5 +22,5 @@ app.use((req, res, next) => {
 
 app.use(meetingsRoutes);
 app.use(adminRoutes);
-
+console.log('Up and running')
 app.listen(PORT);

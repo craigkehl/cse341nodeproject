@@ -1,3 +1,7 @@
+const db = require('../services/db');
+
+const { validationResult } = require('express-validator');
+
 const Person = require('../models/person');
 
 
@@ -10,12 +14,15 @@ exports.postAddPerson = (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
   const access = req.body.access;
-  const person = new Person(fname, lname, gender, birthday, mobile, email, password, access);
-  person
-    .save()
-    .then(() => {
-      res.status(201).json('Your person has been added.');
-    })
-    .catch(err => console.log(err));
+  console.log("In Admin Controller")
+  Person.savePerson(fname, lname, gender, birthday, mobile, email, password, access);
+  // const person = new Person(fname, lname, gender, birthday, mobile, email, password, access);
+  // console.log(person);
+  // person
+  //   .save()
+  //   .then(() => {
+  //     res.status(201).json('Your person has been added.');
+  //   })
+  //   .catch(err => console.log(err));
 };
 
