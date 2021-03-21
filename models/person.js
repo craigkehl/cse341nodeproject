@@ -19,7 +19,7 @@ module.exports = class Person {
     // save method
     save() {
         const query = {
-            text: 'INSERT INTO person(fname, lname, gender, birthday, mobile, email, password, access, id) VALUES($1, $2, $3, $4, $5, $6, $7, $8)',
+            text: 'INSERT INTO persons(fname, lname, gender, birthday, mobile, email, password, access, id) VALUES($1, $2, $3, $4, $5, $6, $7, $8)',
             values: [fname, lname, gender, birthday, mobile, email, password, access]
           }
           // promise
