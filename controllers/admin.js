@@ -1,9 +1,26 @@
-const db = require('../services/db');
-
 const { validationResult } = require('express-validator');
 
+const db = require('../services/db');
 const Person = require('../models/person');
 
+
+exports.getIndex = (req, res, next) => {
+  Person.getAllPersons()
+  .then((result) => {
+    res.status(200).json(result.rows)
+  });
+
+
+//   const sql = "SELECT id, fname, lname FROM church.persons";
+
+//   db.query(sql, (err, res) => {
+//     if (err) {
+//         console.log(err);
+//     }
+//     // resolve(res)
+//     console.log(res.rows);
+// })
+}
 
 exports.postAddPerson = (req, res, next) => {
   const fname = req.body.fname;

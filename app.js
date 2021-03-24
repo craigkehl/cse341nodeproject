@@ -1,4 +1,3 @@
-
 const path = require('path');
 const express = require('express');
 const DATABASE_URL = require('dotenv').config();
@@ -7,8 +6,10 @@ const PORT = process.env.PORT || 5050;
 
 const app = express();
 
+const db = require('./services/db');
 const meetingsRoutes = require('./routes/meeting');
 const adminRoutes = require('./routes/admin');
+const { get } = require('./routes/meeting');
 
 app.use(express.json()); 
 app.use(express.static(path.join(__dirname, 'public')));

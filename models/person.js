@@ -14,12 +14,12 @@ module.exports = class Person {
         this.password = password;
         this.access = access;
 
-        this.name = function() {return this.firstName + " " + this.lastName;};       
+        // this.name = function() {return this.firstName + " " + this.lastName;};       
       }
     // save method
     save() {
         const query = {
-            text: 'INSERT INTO persons(fname, lname, gender, birthday, mobile, email, password, access) VALUES($1, $2, $3, $4, $5, $6, $7, $8)',
+            text: 'INSERT INTO church.persons(fname, lname, gender, birthday, mobile, email, password, access) VALUES($1, $2, $3, $4, $5, $6, $7, $8)',
             values: [this.fname, this.lname, this.gender, this.birthday, this.mobile, this.email, this.password, this.access]
           }
           // promise
@@ -31,7 +31,7 @@ module.exports = class Person {
     // save method
     static savePerson(fname, lname, gender, birthday, mobile, email, password, access) {
         const query = {
-            text: 'INSERT INTO persons(fname, lname, gender, birthday, mobile, email, password, access) VALUES($1, $2, $3, $4, $5, $6, $7, $8)',
+            text: 'INSERT INTO church.persons(fname, lname, gender, birthday, mobile, email, password, access) VALUES($1, $2, $3, $4, $5, $6, $7, $8)',
             values: [fname, lname, gender, birthday, mobile, email, password, access]
           }
           // promise
@@ -43,15 +43,9 @@ module.exports = class Person {
 
     // fetchAll
     static getAllPersons () {
-        return new Promise((resolve, reject) => {~
-            db.query('SELECT * FROM persons', (err, res) => {
-                if (err) {
-                    return reject(err)
-                }
-                resolve(res)
-            })
-        })
+        return db.query('SELECT * FROM church.persons');
     }
+   
 
     // findById
     static getPersonById (id) {
