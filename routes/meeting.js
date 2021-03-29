@@ -19,20 +19,19 @@ router.post(
       .isInt(),
     body('date')
       .isString()
-      .isLength({ min: 3, max: 30 })
-      .trim(),
+      .isISO8601(),
     body('duration')
       .isInt(),
     body('instructor_id')
       .isInt(),
     body('public')
       .isBoolean(),
-      body('meetingLink')
-        .isString()
-        .isLength({ min: 0, max: 30 })
-        .trim(),
-        body('moderator_id')
-          .isInt()      
+    body('meetingLink')
+      .isString()
+      .isLength({ min: 0, max: 30 })
+      .trim(),
+    body('moderator_id')
+      .isInt()      
   ],
   meetingController.postAddMeeting
 );
