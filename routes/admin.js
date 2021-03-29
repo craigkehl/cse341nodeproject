@@ -1,7 +1,7 @@
 const path = require('path');
 
 const express = require('express');
-const { body } = require('express-validator');
+const { body, oneOf } = require('express-validator');
 
 const adminController = require('../controllers/admin');
 
@@ -27,16 +27,26 @@ router.post(
       .trim(),
     body('birthday')
       .isString()
-      .isLength({ min: 12, max: 30 })
-      .trim(),
-    body('mobile')
+      .isISO8601(),    
+    oneOf([
+      body('mobile')
       .isString()
       .isLength({ min: 10, max: 15 })
       .trim(),
-    body('password')
+      body('mobile').isEmpty()
+    ]),
+    oneOf([
+      body('email')
+      .isEmail(),
+      body('email').isEmpty()
+    ]),  
+    oneOf([
+      body('password')
       .isString()
       .isLength({ min: 8, max: 50 })
       .trim(),
+      body('mobile').isEmpty()
+    ]),    
     body('access')
       .isString()
       .isLength({ min: 5, max: 8 })

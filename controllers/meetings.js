@@ -13,8 +13,16 @@ exports.postAddMeeting = (req, res, next) => {
   const public = req.body.public;
   const meetingLink = req.body.meetingLink;
   const moderator = req.body.moderator_id;
-  // const errors = req.body.errors;
 
+  // check validataion
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    console.log(errors);
+    return res.status(422).json({
+      message: 'Validation failed. Please enter the data correctly',
+      errors: errors.array()
+    });
+  }
 
   console.log(meetingName);
   console.log(organization);

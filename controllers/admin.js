@@ -31,15 +31,41 @@ exports.postAddPerson = (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
   const access = req.body.access;
-  console.log("In Admin Controller")
-  Person.savePerson(fname, lname, gender, birthday, mobile, email, password, access);
-  // const person = new Person(fname, lname, gender, birthday, mobile, email, password, access);
+  console.log("In Admin Controller");
+
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    console.log(errors);
+    return res.status(422).json({
+      message: 'Validation failed. Please enter the data correctly',
+      errors: errors.array()
+    });
+  }
+  // res.status(201).json("info received")
+  // Person.savePerson(fname, lname, gender, birthday, mobile, email, password, access)
+  // .then((err, result) => {
+  //   if (err) {
+  //     return res.status(401).json("Person was not saved")
+  //   }
+  //   const personId = getCurrPersonId()
+  //   return result
+  // })
+  // .then((err, result) => {
+  //   if (err) {
+  //     return res.status(401).json('Person cound not be retrieved')
+  //   }
+
+  // })
+  const person = new Person(fname, lname, gender, birthday, mobile, email, password, access);
   // console.log(person);
-  // person
-  //   .save()
-  //   .then(() => {
-  //     res.status(201).json('Your person has been added.');
-  //   })
-  //   .catch(err => console.log(err));
+  person.save()
+    .then((result) => {
+      if (+result == 1){
+        res.status(201).json('Your person has been added.');
+      }
+    }).catch(err => {
+      console.log(err);
+      res.status(401).json('Your person was not added.');
+    });
 };
 

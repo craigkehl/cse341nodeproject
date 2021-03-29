@@ -2,7 +2,7 @@ const path = require('path');
 const express = require('express');
 const DATABASE_URL = require('dotenv').config();
 
-const PORT = process.env.PORT || 5050;
+const PORT = process.env.PORT || 5100;
 
 const app = express();
 

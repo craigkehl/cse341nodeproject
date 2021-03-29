@@ -18,28 +18,57 @@ module.exports = class Person {
       }
     // save method
     save() {
+        console.log("saving person")
         const query = {
             text: 'INSERT INTO church.persons(fname, lname, gender, birthday, mobile, email, password, access) VALUES($1, $2, $3, $4, $5, $6, $7, $8)',
             values: [this.fname, this.lname, this.gender, this.birthday, this.mobile, this.email, this.password, this.access]
           }
-          // promise
+        // promise
+        return new Promise ((resolve, reject) => {
           db
-            .query(query)
-            .then(res => console.log(res.rows[0]))
-            .catch(e => console.error(e.stack))
-      }
+            .query(query, (err, result) => {
+              if (err) {
+                return reject(err);
+              }
+              console.log(result.rowCount);
+              return resolve(result.rowCount);
+            });
+        });
+    }
+
+    getCurrentId() {
+        const query = { 
+          text: "SELECT currval(pg_get_serial_sequence('church.persons', 'id'))"
+        }
+        db.query(query, (result) => {            
+            console.log(result)
+            return resolve(result.rowCount)
+        })
+        .catch(err => {
+          console.error(err.stack)
+          return err.stack
+        });
+    }
+
+
     // save method
-    static savePerson(fname, lname, gender, birthday, mobile, email, password, access) {
-        const query = {
-            text: 'INSERT INTO church.persons(fname, lname, gender, birthday, mobile, email, password, access) VALUES($1, $2, $3, $4, $5, $6, $7, $8)',
-            values: [fname, lname, gender, birthday, mobile, email, password, access]
-          }
-          // promise
-          db
-            .query(query)
-            .then(res => console.log(res.rows[0]))
-            .catch(e => console.error(e.stack))
-      }
+    // static savePerson(fname, lname, gender, birthday, mobile, email, password, access) {
+    //     const query = {
+    //         text: 'INSERT INTO church.persons(fname, lname, gender, birthday, mobile, email, password, access) VALUES($1, $2, $3, $4, $5, $6, $7, $8)',
+    //         values: [fname, lname, gender, birthday, mobile, email, password, access]
+    //       }
+    //       // promise
+    //       return new Promise ((resolve, reject) => {
+    //         db
+    //           .query(query, (err, result) => {
+    //             if (err) {
+    //               return reject(err)
+    //             }
+    //             console.log(result)
+    //             return resolve(result.rowCount)
+    //           })
+    //       })
+    //   }
 
     // fetchAll
     static getAllPersons () {
@@ -58,9 +87,6 @@ module.exports = class Person {
             })
         })
     }
-
-    
-
     
     // deleteById
     static deleteById(id) {}
