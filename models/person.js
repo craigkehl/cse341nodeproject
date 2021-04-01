@@ -71,15 +71,27 @@ module.exports = class Person {
     //   }
 
     // fetchAll
-    static getAllPersons () {
-        return db.query('SELECT * FROM church.persons');
+    static fetchAllPersons () {
+        return db.query(`SELECT id, CONCAT(lname,', ',fname) AS name, birthday, gender, mobile, email FROM church.persons`);
+    }
+
+    static fetchAllPersonsList () {
+      return new Promise((resolve, reject) => {
+          db.query(`SELECT id, CONCAT(lname,', ',fname) AS name FROM church.persons ORDER BY lname`, (err, res) => {
+              if (err) {
+                  return reject(err);
+              }
+              return resolve(res);
+          });
+      })
+
     }
    
 
     // findById
     static getPersonById (id) {
-        return new Promise((resolve, reject) => {~
-            db.query(`SELECT * FROM persons WHERE psersons.id == ${id}`, (err, res) => {
+        return new Promise((resolve, reject) => {
+            db.query(`SELECT * FROM persons WHERE church.persons.id == ${id}`, (err, res) => {
                 if (err) {
                     return reject(err)
                 }

@@ -2,12 +2,14 @@ const { validationResult } = require('express-validator');
 
 const db = require('../services/db');
 const Person = require('../models/person');
+const Organization = require('../models/organization');
+const Calling = require('../models/calling');
 
 
 exports.getIndex = (req, res, next) => {
   Person.getAllPersons()
   .then((result) => {
-    res.status(200).json(result.rows)
+    res.status(200).json({ data: result.rows})
   });
 
 
@@ -69,3 +71,52 @@ exports.postAddPerson = (req, res, next) => {
     });
 };
 
+exports.getAddCalling = (req, res, next) => {
+  const data = {};
+  Organization.fetchAllOrgs()
+    .then((orgs) => {
+      data.organizations = orgs.rows;
+    })
+    .then(() => Person.fetchAllPersonsList())
+    .then((peopleList) => {
+      data.people = peopleList.rows;
+    }) 
+    .then(() => {
+      res.status(200).json({ data: data })
+    });
+}
+
+exports.postAddCalling = (req, res, next) => {
+  const orgId = req.body.orgId;
+  const personId = req.body.personId;
+  const callingName = req.body.calling;
+  const startDate = req.body.startDate;
+  const releaseDate = req.body.releaseDate;
+
+  const calling = new Calling(personId, orgId, callingName, startDate, releaseDate);
+
+  calling.save()
+    .then((result) => {
+      if (+result == 1){
+        res.status(201).json({ message: 'Your calling has been added.'});
+      }
+    }).catch(err => {
+      console.log(err);
+      res.status(401).json({ 
+        message: 'Your calling was not added.',
+        error: err
+      });
+    });
+}
+
+exports.getAllOrgs = (req, res, next) => {
+  Organization.fetchAllOrgs()
+    .then((orgs) => {
+      console.log(orgs);
+      res.status(200).json({data: orgs.rows});
+    })
+    .catch(err => {
+      res.status(404).json({ message: "Could not retrieve organizations"})
+    }
+    )
+}

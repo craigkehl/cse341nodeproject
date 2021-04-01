@@ -55,5 +55,10 @@ router.post(
   adminController.postAddPerson
 );
 
+router.get('/add-calling/', adminController.getAddCalling);
+
+router.post('/add-calling/', adminController.postAddCalling);
+
+router.get('/orgs/', adminController.getAllOrgs);
 
 module.exports = router;

@@ -16,20 +16,20 @@ module.exports = class Calling {
     save() {
         console.log("saving calling")
         const query = {
-            text: 'INSERT INTO church.callings(personId, orgId, calling, startDate, releaseDate) VALUES($1, $2, $3, $4, $5)',
+            text: 'INSERT INTO church.callings(person_id, org_id, calling, start_date, release_date) VALUES($1, $2, $3, $4, $5)',
             values: [this.personId, this.orgId, this.calling, this.startDate, this.releaseDate]
           }
         // promise
-        db
-        .query(query)
-        .then(result => {
-            console.log(result.rowCount)
-            return result.rowCount
-        })
-        .catch(err => {
-            console.error(err.stack)
-            return err.stack
-        });
+        return new Promise ((resolve, reject) => {
+            db
+              .query(query, (err, result) => {
+                if (err) {
+                  return reject(err);
+                }
+                console.log(result.rowCount);
+                return resolve(result.rowCount);
+              });
+          });
     }
 
     // update method
