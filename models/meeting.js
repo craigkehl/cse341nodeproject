@@ -42,12 +42,20 @@ module.exports = class Meeting {
     // fetchAll
     static fetchAll () {
       return new Promise((resolve, reject) => {
-          db.query(`SELECT b.id, m.name AS meeting, b.meeting_id, m.start_date_time,
-          b.meeting_link, CONCAT(p.lname,', ',p.fname) AS moderator, b.moderator_id
+          db.query(`SELECT
+          am.meeting, am.meeting_id, am.start_date_time AS date, 
+        am.id AS broadcast_id, am.meeting_link,
+        CONCAT(p.lname,', ',p.fname) AS moderator, am.moderator_id
+        FROM
+        (
+          SELECT 
+            b.id, m.name AS meeting, b.meeting_id, m.start_date_time,
+              b.meeting_link, b.moderator_id
           FROM church.meetings m
-          LEFT JOIN church.broadcasts b ON m.id = b.meeting_id
-          JOIN church.persons p ON p.id = b.moderator_id
-          ORDER BY m.start_date_time;`, (err, res) => {
+            LEFT JOIN church.broadcasts b ON m.id = b.meeting_id	
+        ) AS am
+        LEFT JOIN church.persons p ON p.id = am.moderator_id
+        ORDER BY date;`, (err, res) => {
               if (err) {
                   return reject(err);
               }
