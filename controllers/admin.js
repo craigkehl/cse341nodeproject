@@ -43,21 +43,7 @@ exports.postAddPerson = (req, res, next) => {
       errors: errors.array()
     });
   }
-  // res.status(201).json("info received")
-  // Person.savePerson(fname, lname, gender, birthday, mobile, email, password, access)
-  // .then((err, result) => {
-  //   if (err) {
-  //     return res.status(401).json("Person was not saved")
-  //   }
-  //   const personId = getCurrPersonId()
-  //   return result
-  // })
-  // .then((err, result) => {
-  //   if (err) {
-  //     return res.status(401).json('Person cound not be retrieved')
-  //   }
-
-  // })
+  
   const person = new Person(fname, lname, gender, birthday, mobile, email, password, access);
   // console.log(person);
   person.save()
