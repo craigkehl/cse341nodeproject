@@ -9,7 +9,7 @@ const app = express();
 const db = require('./services/db');
 const meetingsRoutes = require('./routes/meeting');
 const adminRoutes = require('./routes/admin');
-const { get } = require('./routes/meeting');
+const authRoutes = require('./routes/auth');
 
 app.use(express.json()); 
 app.use(express.static(path.join(__dirname, 'public')));
@@ -21,6 +21,7 @@ app.use((req, res, next) => {
     next();
 });
 
+app.use('/auth/', authRoutes);
 app.use(meetingsRoutes);
 app.use(adminRoutes);
 console.log('Up and running')
