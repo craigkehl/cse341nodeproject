@@ -1,41 +1,76 @@
 const { validationResult } = require('express-validator');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 const User = require('../models/user');
 
 exports.signup = (req, res, next) => {
-    const email = req.body.email;
-    const password = req.body.password;
-    console.log(email);
-    console.log(password);
-    res.status(201).json({ message: 'Got it!'});
 
     const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    console.log(errors);
-    return res.status(422).json({
-      message: 'Validation failed. Please enter the data correctly',
-      errors: errors.array()
-    });
+    const error = new Error('Validation failed.');
+    error.statusCode = 422;
+    error.data = errors.array();
+    throw error;
   }
-
-  const user = new User(email, password);
-  user.save()
-  .then(result => {
-      if (result.rowCount == 1)
-      user.id = result.rows[0].id;
-      console.log(user);
-      return res.status(201).json({
-          message: 'Your meeting has been added.'
+  const email = req.body.email;
+  const password = req.body.password;
+  bcrypt.hash(password, 12)
+    .then(hashedPassword => {
+      const user = new User(email, hashedPassword);
+  return user.save();
+    })
+    .then(result => {
+      res.status(201).json({ 
+        message: "User created",
+      userId: result.rows[0].id
       });
-  })
-  .catch(err => {
-      console.error(err);
-      return res.status(401).json({
-          message: 'Your meeting was not added.',
-          error: err
-      });
+    })
+    .catch(err => {
+    if (!err.statusCode) {
+      err.statusCode = 500;
+    }
+    next(err);
   });
+
 }
+
+exports.login = (req, res, next) => {
+  const email = req.body.email;
+  const password = req.body.password;
+  let currentUser;
+  User.findEmail(email)
+    .then(user => {
+      if (!user) {
+        const error = new Error('Account not found');
+        error.statusCode = 404;
+        throw error;
+      }
+      currentUser = user;
+      return bcrypt.compare(password, user.password);
+    })
+    .then(isEqual => {
+      if (!isEqual) {
+        const error = new Error('Wrong password!');
+        error.statusCode = 401;
+        throw error;
+      }
+      const token = jwt.sign({ 
+        email: currentUser.email, 
+        userId: currentUser.id
+      }, 
+      'SFwG2cTwWwby2030f202!CK',
+      { expiresIn: '1hr' });
+      res.status(200).json({ token: token, userId: currentUser.id });
+    })
+    .catch(err => {
+      if (!err.statusCode) {
+        err.statusCode = 500;
+      }
+      next(err);
+    });
+};
+
 
 // const db = require('../services/db');
 // // const jwt = require('jsonwebtoken');
