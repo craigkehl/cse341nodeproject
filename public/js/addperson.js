@@ -17,7 +17,7 @@ const addperson = () => {
         password: password,
         access: access
     };
-    fetch('http://localhost:5000/add-person/', {
+    fetch('/add-person/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -26,8 +26,8 @@ const addperson = () => {
         })
         .then(response => response.json())
         .then(data => {
-        console.log('Success:', data);
-    });
+        console.log({"Success": data});
+        });
         // .catch((error) => {
         // console.error('Error:', error);
 }

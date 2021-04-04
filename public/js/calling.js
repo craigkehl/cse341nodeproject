@@ -4,7 +4,7 @@ const peopleSelectList = document.getElementById("peopleSelectList");
 
 const getNewCallingData = () => {
 
-    fetch('http://localhost:5100/add-calling/', 
+    fetch('/add-calling/', 
         {
         method: "GET" 
         }
@@ -41,7 +41,7 @@ const addCalling = () => {
         calling: calling,
         startDate: startDate       
     };
-    fetch('http://localhost:5100/add-calling/', {
+    fetch('/add-calling/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

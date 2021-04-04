@@ -3,7 +3,7 @@ const peopleSelectList = document.getElementById("peopleSelectList");
 
 const getNewMeetingData = () => {
 
-    fetch('http://localhost:5100/add-meeting/', 
+    fetch('/add-meeting/', 
         {
         method: "GET" 
         }
@@ -48,7 +48,7 @@ const addMeeting = () => {
         meetingLink: meetingLink,
         moderator_id: moderator
     };
-    fetch('http://localhost:5000/add-meeting/', {
+    fetch('/add-meeting/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
