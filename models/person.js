@@ -36,68 +36,36 @@ module.exports = class Person {
         });
     }
 
-    getCurrentId() {
-        const query = { 
-          text: "SELECT currval(pg_get_serial_sequence('church.persons', 'id'))"
-        }
-        db.query(query, (result) => {            
-            console.log(result)
-            return resolve(result.rowCount)
-        })
-        .catch(err => {
-          console.error(err.stack)
-          return err.stack
-        });
-    }
-
-
-    // save method
-    // static savePerson(fname, lname, gender, birthday, mobile, email, password, access) {
-    //     const query = {
-    //         text: 'INSERT INTO church.persons(fname, lname, gender, birthday, mobile, email, password, access) VALUES($1, $2, $3, $4, $5, $6, $7, $8)',
-    //         values: [fname, lname, gender, birthday, mobile, email, password, access]
-    //       }
-    //       // promise
-    //       return new Promise ((resolve, reject) => {
-    //         db
-    //           .query(query, (err, result) => {
-    //             if (err) {
-    //               return reject(err)
-    //             }
-    //             console.log(result)
-    //             return resolve(result.rowCount)
-    //           })
-    //       })
-    //   }
-
+   
     // fetchAll
     static fetchAllPersons () {
         return db.query(`SELECT id, CONCAT(lname,', ',fname) AS name, birthday, gender, mobile, email FROM church.persons`);
     }
 
     static fetchAllPersonsList () {
+      const query = `SELECT id, CONCAT(lname,', ',fname) AS name FROM church.persons ORDER BY lname`; 
       return new Promise((resolve, reject) => {
-          db.query(`SELECT id, CONCAT(lname,', ',fname) AS name FROM church.persons ORDER BY lname`, (err, res) => {
+          db.query(query, (err, res) => {
               if (err) {
                   return reject(err);
               }
               return resolve(res);
           });
-      })
-
+      });
     }
    
 
     // findById
     static getPersonById (id) {
+      const query = `SELECT * FROM persons WHERE church.persons.id == ${id}`;
         return new Promise((resolve, reject) => {
-            db.query(`SELECT * FROM persons WHERE church.persons.id == ${id}`, (err, res) => {
+            db.query( query, (err, res) => {
                 if (err) {
                     return reject(err)
                 }
                 resolve(res)
-            })
-        })
+            });
+        });
     }
     
     // deleteById

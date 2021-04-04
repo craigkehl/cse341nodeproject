@@ -49,7 +49,7 @@ module.exports = class Meeting {
         FROM
         (
           SELECT 
-            b.id, m.name AS meeting, b.meeting_id, m.start_date_time,
+            b.id, m.name AS meeting, m.id AS meeting_id, m.start_date_time,
               b.meeting_link, b.moderator_id
           FROM church.meetings m
             LEFT JOIN church.broadcasts b ON m.id = b.meeting_id	

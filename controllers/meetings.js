@@ -69,12 +69,16 @@ exports.postAddMeeting = (req, res, next) => {
 
 // broadcasts
 exports.getAddBroadcast = (req, res, next) => {
-  Person.fetchAllPersonsList() //update to only instructors/leaders/broadcasters
-    .then((peopleList) => {
-      data.people = peopleList.rows;
-    }) 
-    .then(() => {
-      res.status(200).json({ data: data })
+  Person.fetchAllPersonsList()
+    .then((err, result) => {
+      if (err) {
+        console.error(err);
+        res.status(401).json({
+          message: "Data error. Please try again later.",
+          error: err
+        });
+      }
+      res.status(200).json({ data: result.rows })
     });
 } 
 
