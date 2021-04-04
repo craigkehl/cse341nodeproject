@@ -7,7 +7,7 @@ const Calling = require('../models/calling');
 
 
 exports.getIndex = (req, res, next) => {
-  Person.getAllPersons()
+  Person.fetchAllPersons()
   .then((result) => {
     res.status(200).json({ data: result.rows})
   });
