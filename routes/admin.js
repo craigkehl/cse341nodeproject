@@ -39,14 +39,7 @@ router.post(
       body('email')
       .isEmail(),
       body('email').isEmpty()
-    ]),  
-    oneOf([
-      body('password')
-      .isString()
-      .isLength({ min: 8, max: 50 })
-      .trim(),
-      body('mobile').isEmpty()
-    ]),    
+    ]), 
     body('access')
       .isString()
       .isLength({ min: 5, max: 8 })

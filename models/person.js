@@ -20,8 +20,8 @@ module.exports = class Person {
     save() {
         console.log("saving person")
         const query = {
-            text: 'INSERT INTO church.persons(fname, lname, gender, birthday, mobile, email, password, access) VALUES($1, $2, $3, $4, $5, $6, $7, $8)',
-            values: [this.fname, this.lname, this.gender, this.birthday, this.mobile, this.email, this.password, this.access]
+            text: 'INSERT INTO church.persons(fname, lname, gender, birthday, mobile, email, access) VALUES($1, $2, $3, $4, $5, $6, $7)',
+            values: [this.fname, this.lname, this.gender, this.birthday, this.mobile, this.email, this.access]
           }
         // promise
         return new Promise ((resolve, reject) => {

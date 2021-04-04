@@ -31,7 +31,6 @@ exports.postAddPerson = (req, res, next) => {
   const birthday = req.body.birthday;
   const mobile = req.body.mobile;
   const email = req.body.email;
-  const password = req.body.password;
   const access = req.body.access;
   console.log("In Admin Controller");
 
@@ -44,7 +43,7 @@ exports.postAddPerson = (req, res, next) => {
     });
   }
   
-  const person = new Person(fname, lname, gender, birthday, mobile, email, password, access);
+  const person = new Person(fname, lname, gender, birthday, mobile, email, access);
   // console.log(person);
   person.save()
     .then((result) => {
