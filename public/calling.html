@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project 2 Calling Entry</title>
+   <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <div class="add-person-container">
+        <h1>Add Calling</h1>
+        <div class="add-person-form"> 
+            <label for="orgSelectList">Organization:<br>
+                <select type="text" name="orgSelectList" id="orgSelectList">
+                    <option value="">Please select</option>
+                </select>
+            </label>
+            <label for="peopleSelectList">Person:<br>
+                <select type="text" name="peopleSelectList" id="peopleSelectList">
+                    <option value="">Please select</option>
+                </select>
+            </label>
+            <label for="calling">Calling:<br>
+                <select type="text" name="calling" id="calling">
+                    <option value="">Instructor</option>
+                    <option value="">Compassionate Leader</option>
+                    <option value="">Ministering</option>
+                    <option value="">1st Counselor</option>
+                    <option value="">2nd Counselor</option>
+                    <option value="">Comittee Chair</option>
+                    <option value="Chorister">Chorister</option>
+                
+                </select>   
+            </label>
+            <label for="start-date">Date called:<br>
+                <input type="date" id="start-date" name="start-date">
+            </label> 
+        </div>
+        <button type="button" onclick="addCalling()">Enter</button>
+    </div>
+
+    <script src="js/calling.js"></script> 
+</body>
+</html>
