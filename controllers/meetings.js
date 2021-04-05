@@ -71,7 +71,10 @@ exports.postAddMeeting = (req, res, next) => {
 exports.getAddBroadcast = (req, res, next) => {
   
   Person.fetchAllPersonsList()
-    .then((err, result) => {
+    .then((result) => {
+      res.status(200).json({ data: result })
+    })
+    .catch(err => {
       if (err) {
         console.error(err);
         res.status(401).json({
@@ -79,8 +82,7 @@ exports.getAddBroadcast = (req, res, next) => {
           error: err
         });
       }
-      res.status(200).json({ result })
-    });
+    })
 } 
 
 exports.getAllBroadcasts = (req, res, next) => {

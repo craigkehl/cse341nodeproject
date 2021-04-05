@@ -46,11 +46,11 @@ module.exports = class Person {
       const query = `SELECT id, CONCAT(lname,', ',fname) AS name FROM church.persons ORDER BY lname`; 
       return new Promise((resolve, reject) => {
           db.query(query, (result) => {
-              return resolve(result.rows);
-          })
-          .catch( err => {
-              return reject(err);          
-          })
+              if (err) {
+                  return reject(err);
+              }
+              return resolve(res.rows);
+          });
       });
     }
    
