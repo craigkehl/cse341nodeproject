@@ -45,12 +45,12 @@ module.exports = class Person {
     static fetchAllPersonsList () {
       const query = `SELECT id, CONCAT(lname,', ',fname) AS name FROM church.persons ORDER BY lname`; 
       return new Promise((resolve, reject) => {
-          db.query(query, (err, res) => {
-              if (err) {
-                  return reject(err);
-              }
-              return resolve(res.rows);
-          });
+          db.query(query, (result) => {
+              return resolve(result.rows);
+          })
+          .catch( err => {
+              return reject(err);          
+          })
       });
     }
    
