@@ -20,8 +20,11 @@ exports.getAddMeeting = (req, res, next) => {
       data.people = peopleList.rows;
     }) 
     .then(() => {
-      res.status(200).json({ data: data })
-    });
+      res.status(200).json({ data: data });
+    })
+    .catch(err => {
+      res.status(404).json({ data: err});
+    })
 }
 
 exports.getAllMeetings = (req, res, next) => {
