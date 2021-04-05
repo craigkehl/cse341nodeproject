@@ -45,11 +45,11 @@ module.exports = class Person {
     static fetchAllPersonsList () {
       const query = `SELECT id, CONCAT(lname,', ',fname) AS name FROM church.persons ORDER BY lname`; 
       return new Promise((resolve, reject) => {
-          db.query(query, (result) => {
-              if (err) {
-                  return reject(err);
+          db.query(query, (error, result) => {
+              if (error) {
+                  return reject(error);
               }
-              return resolve(res.rows);
+              return resolve(result.rows);
           });
       });
     }
