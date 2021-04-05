@@ -5,7 +5,6 @@ const addperson = () => {
     const birthday = document.getElementById('birthday').value;
     const mobile = document.getElementById('mobile').value;
     const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
     const access = document.getElementById('access').value;
     const data = { 
         fname: fname,
@@ -14,7 +13,6 @@ const addperson = () => {
         birthday: birthday,
         mobile: mobile,
         email: email,
-        password: password,
         access: access
     };
     fetch('add-person/', {

@@ -4,14 +4,13 @@ const db = require('../services/db')
 
 // create person class
 module.exports = class Person {
-      constructor(fname, lname, gender, birthday, mobile = 'null', email = 'null', password = 'null', access = 'member') {
+      constructor(fname, lname, gender, birthday, mobile = 'null', email = 'null', access = 'member') {
         this.fname = fname;
         this.lname = lname;
         this.gender = gender;
         this.birthday = birthday;
         this.mobile = mobile;
         this.email = email;
-        this.password = password;
         this.access = access;
 
         // this.name = function() {return this.firstName + " " + this.lastName;};       
