@@ -7,7 +7,7 @@ const adminController = require('../controllers/admin');
 
 const router = express.Router();
 
-router.get('/', adminController.getIndex);
+//router.get('/', adminController.getIndex);
 
 // postAddPerson => POST
 router.post(
