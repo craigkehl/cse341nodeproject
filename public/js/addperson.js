@@ -17,7 +17,7 @@ const addperson = () => {
         password: password,
         access: access
     };
-    fetch('/add-person/', {
+    fetch('add-person/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

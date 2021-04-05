@@ -27,10 +27,12 @@ exports.getAddMeeting = (req, res, next) => {
 exports.getAllMeetings = (req, res, next) => {
   Meeting.fetchAll() 
     .then((meetingList) => {
-      data = meetingList.rows;
+      res.status(200).json({ data: meetingList.rows});
     }) 
-    .then(() => {
-      res.status(200).json({ data: data })
+    .catch(err => {
+      res.status(401).json({ 
+        message: "Error: Meetings not retrieved.",
+        data: err });
     });
 } 
 
