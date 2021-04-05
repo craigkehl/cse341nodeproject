@@ -11,7 +11,6 @@ const getNewMeetingData = () => {
     .then(response => response.json())
     .then(res => {
         console.log(res.data);
-        console.log(res);
         const orgs = res.data.organizations;
         const people = res.data.people;
         let orgList = '';
@@ -64,3 +63,5 @@ const addMeeting = () => {
         // console.error('Error:', error);
 }
   
+
+window.onload = getNewMeetingData();
