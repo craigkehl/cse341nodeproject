@@ -69,6 +69,7 @@ exports.postAddMeeting = (req, res, next) => {
 
 // broadcasts
 exports.getAddBroadcast = (req, res, next) => {
+  
   Person.fetchAllPersonsList()
     .then((err, result) => {
       if (err) {
@@ -78,7 +79,7 @@ exports.getAddBroadcast = (req, res, next) => {
           error: err
         });
       }
-      res.status(200).json({ data: result.rows })
+      res.status(200).json({ result })
     });
 } 
 

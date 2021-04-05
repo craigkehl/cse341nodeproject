@@ -49,7 +49,7 @@ module.exports = class Person {
               if (err) {
                   return reject(err);
               }
-              return resolve(res);
+              return resolve(res.rows);
           });
       });
     }
