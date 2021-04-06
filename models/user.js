@@ -14,7 +14,7 @@ module.exports = class User {
     console.log("saving user")
     const query = {
       text: `INSERT INTO church.users(email, password, person_id) VALUES($1, $2, $3) RETURNING *`,
-      values: [this.email, this.password, this.id]
+      values: [this.email, this.password, this.person_id]
     }
     // promise
     return new Promise ((resolve, reject) => {

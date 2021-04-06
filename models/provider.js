@@ -50,7 +50,7 @@ module.exports = class Provider {
     }
 
     static fetchProviderById(id) {
-       const query = `SELECT * FROM church.providers WHERE church.persons.id == ${id};`
+       const query = `SELECT * FROM church.providers WHERE church.providers.id == ${id};`
         db.query(query)
         .then(result => {
             if (result.rowCount = 1) {
@@ -68,7 +68,7 @@ module.exports = class Provider {
     // deleteById
     static deleteById(id) {
         return new Promise((resolve, reject) => {
-            db.query(`DELETE FROM church.broadcasts
+            db.query(`DELETE FROM church.providers
             WHERE id = ${id};`, (err, res) => {
                 if (err) {
                     return reject(err);

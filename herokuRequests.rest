@@ -9,15 +9,17 @@
 GET https://cse341proj2.herokuapp.com/add-broadcast
 
 ###
-
+### be sure to run the requests included below 
+### to first get existing ids 
+### and make sure the meeting_id doesn't already have
+### a broadcast tied to it.
 POST https://cse341proj2.herokuapp.com/add-broadcast
-
 Content-Type: application/json
 
 {
-    "meeting_id": 20,
-    "moderator_id": 6,
-    "provider_id": 3,
+    "meeting_id": 12,
+    "moderator_id": 2,
+    "provider_id": 2,
     "meetingLink": "sasdfassasdfgasdfk123"
 }
 
@@ -46,15 +48,14 @@ GET https://cse341proj2.herokuapp.com/add-calling
 ###
 
 POST https://cse341proj2.herokuapp.com/add-calling
-
 Content-Type: application/json
 
 {
-    "orgId": "27",
-    "personId": "8",
+    "orgId": 27,
+    "personId": 8,
     "calling": "calling",
-    "startDate": "2021-03-28",
-    "releaseDate": "2023-03-28"
+    "startDate": "2021-03-28T00:00:00+07",
+    "releaseDate": "2023-03-28T00:00:00+07"
 }
 
 
@@ -70,25 +71,23 @@ GET https://cse341proj2.herokuapp.com/add-meeting
 ###  testing all fields utilized
 
 POST https://cse341proj2.herokuapp.com/add-meeting
-
 Content-Type: application/json
 
 {
     "meetingName": "Conference",
-    "org_id": "1",
-    "date": "2021-04-03 10:00:00+07",
-    "duration": "120",
-    "instructor_id": "1",
-    "public": "1",
+    "org_id": 1,
+    "date": "2021-04-03T10:00:00+07",
+    "duration": 120,
+    "instructor_id": 1,
+    "public": 1,
     "meetingLink": "meetingLink",
-    "moderator_id": "2"
+    "moderator_id": 2
 }
 
 
 ### testing partial post (no broadcast data added)
 
 POST https://cse341proj2.herokuapp.com/add-meeting
-
 Content-Type: application/json
 
 {
@@ -110,7 +109,6 @@ GET https://cse341proj2.herokuapp.com/orgs
 ### ********* people **************
 ### all fields filled
 POST https://cse341proj2.herokuapp.com/add-person
-
 Content-Type: application/json
 
 { 
@@ -127,7 +125,6 @@ Content-Type: application/json
 ### check if bad email is detected
 
 POST https://cse341proj2.herokuapp.com/add-person
-
 Content-Type: application/json
 
 { 
@@ -144,8 +141,7 @@ Content-Type: application/json
 ### ********* Authentication **************
 ###
 
-PUT https://cse341proj2.herokuapp.com/signup
-
+PUT http://localhost:5100/auth/signup
 Content-Type: application/json
 
 {
@@ -157,8 +153,7 @@ Content-Type: application/json
 }
 
 ###
-POST https://cse341proj2.herokuapp.com/login
-
+POST http://localhost:5100/auth/login
 Content-Type: application/json
 
 {

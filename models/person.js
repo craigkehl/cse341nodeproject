@@ -28,6 +28,7 @@ module.exports = class Person {
           if (err) {
             return reject(err);
           };
+          debugger
           if (result.rowCount == 1) {
             return resolve(result.rows[0]); 
           }

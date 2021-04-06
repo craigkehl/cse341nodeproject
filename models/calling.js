@@ -14,9 +14,10 @@ module.exports = class Calling {
 
     // save method
     save() {
+        debugger
         console.log("saving calling")
         const query = {
-            text: 'INSERT INTO church.callings(person_id, org_id, calling, start_date, release_date) VALUES($1, $2, $3, $4, $5)',
+            text: 'INSERT INTO church.callings(person_id, org_id, calling, start_date, release_date) VALUES($1, $2, $3, $4, $5);',
             values: [this.personId, this.orgId, this.calling, this.startDate, this.releaseDate]
           }
         // promise
