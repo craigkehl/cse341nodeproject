@@ -44,19 +44,21 @@ exports.getAddCalling = (req, res, next) => {
   Organization.fetchAllOrgs()
   .then(orgs => {
     data.organizations = orgs.rows;
+    return Person.fetchAllPersonsList();
   })
-  .then(() => Person.fetchAllPersonsList())
   .then((peopleList) => {
+    debugger
     data.people = peopleList.rows;
-  }) 
-  .then(() => {
     res.status(200).json({ 
-      message: 'Your calling was added',
+      message: 'Here is the data for your new calling',
       data: data })
-  })
+  }) 
   .catch(err => {
     console.log(err);
-    res.status(401).json('Your calling was not added.');
+    res.status(401).json({ 
+      message: 'Please try again later.',
+      data: err
+      });
   });
 }
 

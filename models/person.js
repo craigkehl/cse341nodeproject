@@ -38,19 +38,13 @@ module.exports = class Person {
 
   // fetchAll
   static fetchAllPersons () {
-    return db.query(`SELECT id, CONCAT(lname,', ',fname) AS name, birthday, gender, mobile, email FROM church.persons`);
+    return db.query(`SELECT id, CONCAT(lname,', ',fname) AS name, birthday, gender, mobile, email FROM church.persons;`);
   }
 
   static fetchAllPersonsList () {
-    const query = `SELECT id, CONCAT(lname,', ',fname) AS name FROM church.persons ORDER BY lname`; 
-    return new Promise((resolve, reject) => {
-      db.query(query, (error, result) => {
-        if (error) {
-            return reject(error);
-        }
-        return resolve(result.rows);
-      });
-    });
+    const query = `SELECT id, CONCAT(lname,', ',fname) AS name FROM church.persons ORDER BY lname;`; 
+    debugger
+    return db.query(query);
   }
 
   // findById
