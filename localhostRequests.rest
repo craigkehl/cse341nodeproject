@@ -1,0 +1,162 @@
+### Endpoint testing file for 2nd Project CSE341
+# Author Craig Kehl
+
+# If REST Client extention is installed in VS Code, 
+# you can click the "Send Request" link above each request
+# to send a request and receive a response
+
+### ********* Broadcasts **************
+GET http://localhost:5100/add-broadcast
+
+###
+### Before running this request below 
+### get existing meeting ids without a broadcast_id
+### of null from the get meetings request below
+POST http://localhost:5100/add-broadcast
+Content-Type: application/json
+
+{
+    "meeting_id": 10,
+    "moderator_id": 2,
+    "provider_id": 2,
+    "meetingLink": "sasdfassasdfgasdfk123"
+}
+
+###
+
+GET http://localhost:5100/broadcasts
+
+###
+
+// replace the 2 with the desired broadcast id parameter
+GET http://localhost:5100/broadcast/2
+
+
+###
+// replace the 11 with the desired broadcast id parameter
+// from the broadcasts request above
+DELETE http://localhost:5100/broadcast/28
+
+
+
+
+
+### ********* Callings **************
+
+GET http://localhost:5100/add-calling
+
+###
+
+POST http://localhost:5100/add-calling
+Content-Type: application/json
+
+{
+    "orgId": 27,
+    "personId": 8,
+    "calling": "calling",
+    "startDate": "2021-03-28T00:00:00+07",
+    "releaseDate": "2023-03-28T00:00:00+07"
+}
+
+
+### ********* Meetings **************
+
+GET http://localhost:5100/meetings/
+
+
+###
+
+GET http://localhost:5100/add-meeting
+
+###  testing all fields utilized
+
+POST http://localhost:5100/add-meeting
+Content-Type: application/json
+
+{
+    "meetingName": "Conference",
+    "org_id": 1,
+    "date": "2021-04-03T10:00:00+07",
+    "duration": 120,
+    "instructor_id": 1,
+    "public": 1,
+    "meetingLink": "meetingLink",
+    "moderator_id": 2
+}
+
+
+### testing partial post (no broadcast data added)
+
+POST http://localhost:5100/add-meeting
+Content-Type: application/json
+
+{
+    "meetingName": "Conference",
+    "org_id": "1",
+    "date": "2021-04-03 10:00:00+07",
+    "duration": "120",
+    "instructor_id": "1",
+    "public": "1",
+    "meetingLink": "",
+    "moderator_id": ""
+}
+
+### ********* Organizations **************
+### Returns all organzations
+GET http://localhost:5100/orgs
+
+
+### ********* people **************
+### all fields filled
+POST http://localhost:5100/add-person
+Content-Type: application/json
+
+{ 
+    "fname": "test3_fname",
+    "lname": "test3_lname",
+    "gender": "male",
+    "birthday": "2016-05-01",
+    "mobile": "8014445555",
+    "email": "newtest@email.tv",
+    "access": "member"
+}
+
+
+### check if bad email is detected
+
+POST http://localhost:5100/add-person
+Content-Type: application/json
+
+{ 
+    "fname": "test2_fname",
+    "lname": "test2_lname",
+    "gender": "male",
+    "birthday": "2016-05-01",
+    "mobile": "80144455555",
+    "email": "newtest@email",
+    "access": "member"
+}
+
+
+### ********* Authentication **************
+###
+
+PUT http://localhost:5100/auth/signup
+Content-Type: application/json
+
+{
+    "fname": "Bob",
+    "lname": "Peterson",
+    "gender": "male",
+    "email": "bob@peterson.com",
+    "password": "MyB!gPassword"
+}
+
+###
+POST http://localhost:5100/auth/login
+Content-Type: application/json
+
+{
+    "email": "bob@peterson.com",
+    "password": "MyB!gPassword"
+}

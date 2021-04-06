@@ -79,7 +79,7 @@ exports.postAddMeeting = (req, res, next) => {
       errors: errors.array()
     });
   }
-
+ 
   const meeting = new Meeting(meetingName, date, duration, isPublic, orgId);
   meeting.save()
   .then(result => {
@@ -153,6 +153,7 @@ exports.postAddBroadcast = (req, res, next) => {
   }
 
   const broadcast = new Broadcast (meetingId, moderatorId, meetingLink, providerId);
+  debugger
   broadcast.save()
   .then((result) => {
       res.status(201).json('Your broadcast has been added.');
@@ -164,6 +165,7 @@ exports.postAddBroadcast = (req, res, next) => {
 
 
 exports.deleteBroadcastById = (req, res, next) => {
+  debugger
   const id = req.params.id;
   Broadcast.deleteById(id) 
   .then(result => {

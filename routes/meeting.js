@@ -57,7 +57,7 @@ router.post(
   meetingController.postAddBroadcast
 );
 
-router.delete('/broadcast:id', 
+router.delete('/broadcast/:id', 
 param('id').isInt(),
 meetingController.deleteBroadcastById);
 
