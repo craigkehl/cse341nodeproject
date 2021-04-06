@@ -1,0 +1,167 @@
+### Endpoint testing file for 2nd Project CSE341
+# Author Craig Kehl
+
+# If REST Client extention is installed in VS Code, 
+# you can click the "Send Request" link above each request
+# to send a request and receive a response
+
+### ********* Broadcasts **************
+GET https://cse341proj2.herokuapp.com/add-broadcast
+
+###
+
+POST https://cse341proj2.herokuapp.com/add-broadcast
+
+Content-Type: application/json
+
+{
+    "meeting_id": 20,
+    "moderator_id": 6,
+    "provider_id": 3,
+    "meetingLink": "sasdfassasdfgasdfk123"
+}
+
+###
+
+GET https://cse341proj2.herokuapp.com/broadcasts
+
+###
+
+// replace the 2 with the desired broadcast id parameter
+GET https://cse341proj2.herokuapp.com/broadcast/2
+
+
+###
+// replace the 11 with the desired broadcast id parameter
+DELETE https://cse341proj2.herokuapp.com/broadcast/11
+
+
+
+
+
+### ********* Callings **************
+
+GET https://cse341proj2.herokuapp.com/add-calling
+
+###
+
+POST https://cse341proj2.herokuapp.com/add-calling
+
+Content-Type: application/json
+
+{
+    "orgId": "27",
+    "personId": "8",
+    "calling": "calling",
+    "startDate": "2021-03-28",
+    "releaseDate": "2023-03-28"
+}
+
+
+### ********* Meetings **************
+
+GET https://cse341proj2.herokuapp.com/meetings/
+
+
+###
+
+GET https://cse341proj2.herokuapp.com/add-meeting
+
+###  testing all fields utilized
+
+POST https://cse341proj2.herokuapp.com/add-meeting
+
+Content-Type: application/json
+
+{
+    "meetingName": "Conference",
+    "org_id": "1",
+    "date": "2021-04-03 10:00:00+07",
+    "duration": "120",
+    "instructor_id": "1",
+    "public": "1",
+    "meetingLink": "meetingLink",
+    "moderator_id": "2"
+}
+
+
+### testing partial post (no broadcast data added)
+
+POST https://cse341proj2.herokuapp.com/add-meeting
+
+Content-Type: application/json
+
+{
+    "meetingName": "Conference",
+    "org_id": "1",
+    "date": "2021-04-03 10:00:00+07",
+    "duration": "120",
+    "instructor_id": "1",
+    "public": "1",
+    "meetingLink": "",
+    "moderator_id": ""
+}
+
+### ********* Organizations **************
+### Returns all organzations
+GET https://cse341proj2.herokuapp.com/orgs
+
+
+### ********* people **************
+### all fields filled
+POST https://cse341proj2.herokuapp.com/add-person
+
+Content-Type: application/json
+
+{ 
+    "fname": "test3_fname",
+    "lname": "test3_lname",
+    "gender": "male",
+    "birthday": "2016-05-01",
+    "mobile": "8014445555",
+    "email": "newtest@email.tv",
+    "access": "member"
+}
+
+
+### check if bad email is detected
+
+POST https://cse341proj2.herokuapp.com/add-person
+
+Content-Type: application/json
+
+{ 
+    "fname": "test2_fname",
+    "lname": "test2_lname",
+    "gender": "male",
+    "birthday": "2016-05-01",
+    "mobile": "80144455555",
+    "email": "newtest@email",
+    "access": "member"
+}
+
+
+### ********* Authentication **************
+###
+
+PUT https://cse341proj2.herokuapp.com/signup
+
+Content-Type: application/json
+
+{
+    "fname": "Bob",
+    "lname": "Peterson",
+    "gender": "male",
+    "email": "bob@peterson.com",
+    "password": "MyB!gPassword"
+}
+
+###
+POST https://cse341proj2.herokuapp.com/login
+
+Content-Type: application/json
+
+{
+    "email": "bob@peterson.com",
+    "password": "MyB!gPassword"
+}

@@ -1,0 +1,26 @@
+
+GET http://localhost:5100/meetings
+
+###
+
+GET http://localhost:5100/add-broadcast
+
+###
+
+POST https://localhost:5100/auth/signup
+
+Content-Type: application/json
+
+{
+    "email": "keh1903@byui.edu",
+    "password": "Sup3rU$erCk"
+}
+
+###
+
+POST http://localhost:5100/add-calling
+Content-Type: application/json
+
+{
+
+}

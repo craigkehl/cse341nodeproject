@@ -3,72 +3,89 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const User = require('../models/user');
+const Person = require('../models/person');
+const fetchAcctByEmail = require('../library/utilities');
 
 exports.signup = (req, res, next) => {
 
-    const errors = validationResult(req);
+    const errors = validationResult(req)
   if (!errors.isEmpty()) {
     const error = new Error('Validation failed.');
     error.statusCode = 422;
     error.data = errors.array();
     throw error;
   }
+  const fname = req.body.fname;
+  const lname = req.body.lname;
+  const gender = req.body.gender;
   const email = req.body.email;
   const password = req.body.password;
-  bcrypt.hash(password, 12)
-    .then(hashedPassword => {
-      const user = new User(email, hashedPassword);
-  return user.save();
-    })
-    .then(result => {
+  const hashedPassword = bcrypt.hash(password, 12);
+  existingEmail(email, 'persons')
+  .then(person => {
+    if (person.id > 0) {
+      return person;
+    }
+    const birthday = null;
+    const mobile = null;
+    const access = 'member';
+    return new Person(fname, lname, gender, birthday, mobile, email, access);
+  })
+  .then(person => {
+    const user = User(email, hashedPassword, person.id);
+    return user.save();
+  })
+  .then(user => {
+    if (user.id > 0) {
       res.status(201).json({ 
-        message: "User created",
-      userId: result.rows[0].id
+        message: "User created"  // ****** time for token **************
       });
-    })
-    .catch(err => {
+    }
+    // possible place to add error if no user_id  
+  })
+  .catch(err => {
     if (!err.statusCode) {
       err.statusCode = 500;
     }
     next(err);
   });
-
 }
 
 exports.login = (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
   let currentUser;
-  User.findEmail(email)
-    .then(user => {
-      if (!user) {
-        const error = new Error('Account not found');
-        error.statusCode = 404;
-        throw error;
-      }
-      currentUser = user;
-      return bcrypt.compare(password, user.password);
-    })
-    .then(isEqual => {
-      if (!isEqual) {
-        const error = new Error('Wrong password!');
-        error.statusCode = 401;
-        throw error;
-      }
-      const token = jwt.sign({ 
-        email: currentUser.email, 
-        userId: currentUser.id
-      }, 
-      'SFwG2cTwWwby2030f202!CK',
-      { expiresIn: '1hr' });
-      res.status(200).json({ token: token, userId: currentUser.id });
-    })
-    .catch(err => {
-      if (!err.statusCode) {
-        err.statusCode = 500;
-      }
-      next(err);
-    });
+  
+  fetchAcctByEmail(email, 'users')
+  .then(user => {
+    if (!user) {
+      const error = new Error('Account not found');
+      error.statusCode = 404;
+      throw error;
+    }
+    currentUser = user;
+    return bcrypt.compare(password, user.password);
+  })
+  .then(isEqual => {
+    if (!isEqual) {
+      const error = new Error('Wrong password!');
+      error.statusCode = 401;
+      throw error;
+    }
+    const accessToken = jwt.sign({ 
+      email: currentUser.email, 
+      userId: currentUser.id
+    }, 
+    process.env.ACCESS_TOKEN_SECRET,
+    { expiresIn: '1hr' });
+    res.status(200).json({ token: accessToken, userId: currentUser.id });
+  })
+  .catch(err => {
+    if (!err.statusCode) {
+      err.statusCode = 500;
+    }
+    next(err);
+  });
 };
 
 

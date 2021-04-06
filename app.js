@@ -11,6 +11,7 @@ const db = require('./services/db');
 const meetingsRoutes = require('./routes/meeting');
 const adminRoutes = require('./routes/admin');
 const authRoutes = require('./routes/auth');
+const { runInNewContext } = require('vm');
 
 app.use(express.json()); 
 app.use(express.static(path.join(__dirname, 'public')));
@@ -22,7 +23,15 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use('/auth/', authRoutes);
+// app.post('/auth/signup', (req, res) => {
+//     const email = req.body.email;
+//     const password = req.body.password;
+//     console.log(email);
+//     console.log(password);
+//     res.status(200).json({message: "Got it"});
+// })
+
+app.use('/auth', authRoutes);
 app.use(meetingsRoutes);
 app.use(adminRoutes);
 
