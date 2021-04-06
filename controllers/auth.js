@@ -20,25 +20,30 @@ exports.signup = (req, res, next) => {
   const gender = req.body.gender;
   const email = req.body.email;
   const password = req.body.password;
-  const hashedPassword = bcrypt.hash(password, 12);
-  existingEmail(email, 'persons')
+  const hashedPassword = bcrypt.hash(password, 12)
+  fetchAcctByEmail(email, 'persons')
   .then(person => {
-    if (person.id > 0) {
+    if (person) {
       return person;
     }
     const birthday = null;
     const mobile = null;
     const access = 'member';
-    return new Person(fname, lname, gender, birthday, mobile, email, access);
+    const newPerson = new Person(fname, lname, gender, birthday, mobile, email, access);
+    return newPerson.save();
   })
   .then(person => {
-    const user = User(email, hashedPassword, person.id);
-    return user.save();
+    debugger
+    return hashedPassword.then((hash) => {
+      const user = new User(email, hash, person.id);
+      return user.save();
+    });
   })
   .then(user => {
+    debugger
     if (user.id > 0) {
       res.status(201).json({ 
-        message: "User created"  // ****** time for token **************
+        message: "User created" 
       });
     }
     // possible place to add error if no user_id  
@@ -63,6 +68,7 @@ exports.login = (req, res, next) => {
       error.statusCode = 404;
       throw error;
     }
+    debugger
     currentUser = user;
     return bcrypt.compare(password, user.password);
   })
