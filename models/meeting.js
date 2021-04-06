@@ -3,19 +3,19 @@ const db = require('../services/db')
 
 // create meeting class
 module.exports = class Meeting {
-    constructor(meetingName, date, duration, isPublic, orgId) {
+    constructor(meetingName, date, duration, is_public, orgId) {
         this.meetingName = meetingName,
         this.date = date,
         this.duration = duration,
-        this.isPublic = isPublic,
+        this.is_public = is_public,
         this.orgId = orgId
     }
     // save method
     async save() {
         console.log("saving meeting");
         const query = {
-          text: 'INSERT INTO church.meetings(name, start_date_time, duration, "isPublic") VALUES($1, $2, $3, $4) RETURNING id',
-          values: [this.meetingName, this.date, this.duration, this.isPublic]
+          text: 'INSERT INTO church.meetings(name, start_date_time, duration, "is_public") VALUES($1, $2, $3, $4) RETURNING id',
+          values: [this.meetingName, this.date, this.duration, this.is_public]
         };
         const client = await db.connect();
 

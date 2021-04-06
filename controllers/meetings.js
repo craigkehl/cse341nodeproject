@@ -68,7 +68,7 @@ exports.postAddMeeting = (req, res, next) => {
   const meetingName = req.body.meetingName;
   const date = req.body.date;
   const duration = req.body.duration;
-  const isPublic = req.body.public;
+  const is_public = req.body.public;
   const orgId = req.body.org_id;
   
   const errors = validationResult(req);
@@ -80,7 +80,7 @@ exports.postAddMeeting = (req, res, next) => {
     });
   }
  
-  const meeting = new Meeting(meetingName, date, duration, isPublic, orgId);
+  const meeting = new Meeting(meetingName, date, duration, is_public, orgId);
   meeting.save()
   .then(result => {
     return res.status(201).json({ 
