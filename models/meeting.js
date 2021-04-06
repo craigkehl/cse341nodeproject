@@ -39,7 +39,7 @@ module.exports = class Meeting {
     }
 
 
-    // fetchAll
+    // fetchAll all meetings
     static fetchAll () {
       const query = `SELECT
         am.meeting, am.meeting_id, am.start_date_time AS date, 
@@ -64,7 +64,63 @@ module.exports = class Meeting {
           });
       })  
     }
+
+
+    // fetchAll Current Meetings
+    static fetchAllCurrent () {
+      const query = `SELECT
+        am.meeting, am.meeting_id, am.start_date_time AS date, 
+        am.id AS broadcast_id, am.meeting_link,
+        CONCAT(p.lname,', ',p.fname) AS moderator, am.moderator_id
+        FROM
+        (
+          SELECT 
+            b.id, m.name AS meeting, m.id AS meeting_id, m.start_date_time,
+              b.meeting_link, b.moderator_id
+          FROM church.meetings m
+            LEFT JOIN church.broadcasts b ON m.id = b.meeting_id	
+        ) AS am
+        LEFT JOIN church.persons p ON p.id = am.moderator_id
+        WHERE am.start_date_time > now()
+        ORDER BY date;`;
+      return new Promise((resolve, reject) => {
+          db.query( query, (err, res) => {
+              if (err) {
+                  return reject(err);
+              }
+              return resolve(res);
+          });
+      })  
+    }
    
+    // fetchAll Current Public Meetings
+    static fetchAllPublicCurrent () {
+      const query = `SELECT
+      am.meeting, am.meeting_id, am.start_date_time AS date, 
+      am.id AS broadcast_id, am.meeting_link,
+      CONCAT(p.lname,', ',p.fname) AS moderator, am.moderator_id,
+      am.is_public
+    FROM
+    (
+      SELECT 
+      b.id, m.name AS meeting, m.id AS meeting_id, m.start_date_time,
+      b.meeting_link, b.moderator_id, m.is_public
+      FROM church.meetings m
+      LEFT JOIN church.broadcasts b ON m.id = b.meeting_id
+      WHERE m.is_public = 't'
+    ) AS am
+    LEFT JOIN church.persons p ON p.id = am.moderator_id
+    WHERE am.start_date_time > now()
+    ORDER BY date;`;
+      return new Promise((resolve, reject) => {
+          db.query( query, (err, res) => {
+              if (err) {
+                  return reject(err);
+              }
+              return resolve(res);
+          });
+      })  
+    }
 
     // findById
     static fetchById (id) {

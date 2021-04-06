@@ -11,6 +11,7 @@ const Broadcast = require('../models/broadcast');
 // meetings require orgs and people to be scheduled
 exports.getAddMeeting = (req, res, next) => {
   const data = {};
+  debugger
   Organization.fetchAllOrgs()
     .then((orgs) => {
       data.organizations = orgs.rows;
@@ -29,6 +30,30 @@ exports.getAddMeeting = (req, res, next) => {
 
 exports.getAllMeetings = (req, res, next) => {
   Meeting.fetchAll() 
+    .then((meetingList) => {
+      res.status(200).json({ data: meetingList.rows});
+    }) 
+    .catch(err => {
+      res.status(401).json({ 
+        message: "Error: Meetings not retrieved.",
+        data: err });
+    });
+} 
+
+exports.getAllCurrentMeetings = (req, res, next) => {
+  Meeting.fetchAllCurrent() 
+    .then((meetingList) => {
+      res.status(200).json({ data: meetingList.rows});
+    }) 
+    .catch(err => {
+      res.status(401).json({ 
+        message: "Error: Meetings not retrieved.",
+        data: err });
+    });
+} 
+
+exports.getAllPublicCurrentMeetings = (req, res, next) => {
+  Meeting.fetchAllPublicCurrent() 
     .then((meetingList) => {
       res.status(200).json({ data: meetingList.rows});
     }) 

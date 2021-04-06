@@ -8,10 +8,11 @@ const meetingController = require('../controllers/meetings');
 const router = express.Router();
 
 // *** meetings ***//
-router.get('/add-meeting/', meetingController.getAddMeeting);
+router.get('/add-meeting', meetingController.getAddMeeting);
 
-router.get('/meetings/', meetingController.getAllMeetings);
+router.get('/meetings', meetingController.getAllMeetings);
 
+router.get('/get')
 
 router.post(
   '/add-meeting/',
@@ -34,13 +35,13 @@ router.post(
 
 
 // *** broadcasts ***//
-router.get('/add-broadcast/', meetingController.getAddBroadcast);
+router.get('/add-broadcast', meetingController.getAddBroadcast);
 
 router.get('/broadcast/:id', 
   param('id').isInt(),
   meetingController.getBroadcastById);
 
-router.get('/broadcasts/', meetingController.getAllBroadcasts);
+router.get('/broadcasts', meetingController.getAllBroadcasts);
 
 router.post(
   '/add-broadcast/',
@@ -56,7 +57,7 @@ router.post(
   meetingController.postAddBroadcast
 );
 
-router.delete('/broadcast/:id', 
+router.delete('/broadcast:id', 
 param('id').isInt(),
 meetingController.deleteBroadcastById);
 
