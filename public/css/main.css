@@ -232,3 +232,7 @@ nav ul li:hover,
     height:fit-content;
     text-decoration: none;
 }
+#load {
+    display: flex;
+    justify-content: center;
+}
