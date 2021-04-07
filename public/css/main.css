@@ -22,6 +22,7 @@ label {
 
 input {
     min-width: 100px;
+    border-style: outset;
 }
 
 input[type="radio"] {
@@ -46,6 +47,7 @@ input[type="radio"] {
     height: fit-content;
     align-self: center;
     justify-self: center;
+    border-style: outset;
 } 
 
 .add-meeting-container,
@@ -53,6 +55,10 @@ input[type="radio"] {
     display: flex;
     flex-direction: column;
     width: fit-content;
+    padding: 0 0 2rem 0;
+    background-color: lightblue;
+    margin: 2rem;
+    box-shadow: 2px 2px 4px;
 }
 
 div.block {
