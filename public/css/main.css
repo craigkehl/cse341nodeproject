@@ -203,8 +203,9 @@ nav ul {
 nav ul li {
     list-style-type: none;
     margin: 0 1rem;
-
+    
 }
-nav ul li :hover {
+nav ul li:hover {
     transform: scale(1.1);
+    cursor: pointer;
 }
