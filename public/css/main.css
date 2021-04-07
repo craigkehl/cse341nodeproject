@@ -225,7 +225,7 @@ nav ul li:hover,
     cursor: pointer;
 }
 
-.bnt-link {
+.btn-link {
     background-color: grey;
     border-style: outset;
     width:fit-content;
