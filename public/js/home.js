@@ -38,9 +38,7 @@ const getCurMeetingData = () => {
                         <span class="moderator-name">${m.moderator}</span>                    
                     </div>
                     <div class="meeting-link">
-                        <h5>Link:</h5><a class="btn meeting-btn" href="${m.meeting_link}"><span class="btn-link">
-                        Goto Link
-                        </span></a>
+                        <h5>Link:</h5><a class="meeting-btn btn-link" href="${m.meeting_link}">Goto Link</a>
                     </div>
                 </div>
                 </div>

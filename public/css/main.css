@@ -231,6 +231,7 @@ nav ul li:hover,
     width:fit-content;
     height:fit-content;
     text-decoration: none;
+    
 }
 #load {
     display: flex;
