@@ -224,3 +224,11 @@ nav ul li:hover,
     transform: scale(1.1);
     cursor: pointer;
 }
+
+.bnt-link {
+    background-color: grey;
+    border-style: outset;
+    width:fit-content;
+    height:fit-content;
+    text-decoration: none;
+}

@@ -37,8 +37,8 @@ const getCurMeetingData = () => {
                         <span class="moderator-name">${m.moderator}</span>                    
                     </div>
                     <div class="meeting-link">
-                        <h5>Link:</h5><a class="btn meeting-btn" href="${m.meeting_link}"><span class="material-icons-two-tone">
-                        smart_display
+                        <h5>Link:</h5><a class="btn meeting-btn" href="${m.meeting_link}"><span class="btn-link">
+                        Goto Link
                         </span></a>
                     </div>
                 </div>
