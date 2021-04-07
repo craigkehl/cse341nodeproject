@@ -83,7 +83,7 @@ exports.postAddMeeting = (req, res, next) => {
   const duration = req.body.duration;
   const is_public = req.body.public;
   const orgId = req.body.org_id;
-  
+  console.log(req.body);
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     console.log(errors);
