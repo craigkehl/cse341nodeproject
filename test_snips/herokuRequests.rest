@@ -6,13 +6,13 @@
 # to send a request and receive a response
 
 ### ********* Broadcasts **************
-GET http://localhost:5100/add-broadcast
+GET https://cse341proj2.herokuapp.com/add-broadcast
 
 ###
 ### Before running this request below 
 ### get existing meeting ids without a broadcast_id
 ### of null from the get meetings request below
-POST http://localhost:5100/add-broadcast
+POST https://cse341proj2.herokuapp.com/add-broadcast
 Content-Type: application/json
 
 {
@@ -24,18 +24,18 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:5100/broadcasts
+GET https://cse341proj2.herokuapp.com/broadcasts
 
 ###
 
 // replace the 2 with the desired broadcast id parameter
-GET http://localhost:5100/broadcast/2
+GET https://cse341proj2.herokuapp.com/broadcast/2
 
 
 ###
 // replace the 11 with the desired broadcast id parameter
 // from the broadcasts request above
-DELETE http://localhost:5100/broadcast/28
+DELETE https://cse341proj2.herokuapp.com/broadcast/28
 
 
 
@@ -43,11 +43,11 @@ DELETE http://localhost:5100/broadcast/28
 
 ### ********* Callings **************
 
-GET http://localhost:5100/add-calling
+GET https://cse341proj2.herokuapp.com/add-calling
 
 ###
 
-POST http://localhost:5100/add-calling
+POST https://cse341proj2.herokuapp.com/add-calling
 Content-Type: application/json
 
 {
@@ -61,21 +61,21 @@ Content-Type: application/json
 
 ### ********* Meetings **************
 
-GET http://localhost:5100/meetings/
+GET https://cse341proj2.herokuapp.com/meetings/
 
 
 ###
 
-GET http://localhost:5100/add-meeting
+GET https://cse341proj2.herokuapp.com/add-meeting
 
 ###  testing all fields utilized
 
-POST http://localhost:5100/add-meeting
+POST https://cse341proj2.herokuapp.com/add-meeting
 Content-Type: application/json
 
 {
-    "meetingName": "Conference",
-    "org_id": 1,
+    "meetingName": "Gospel Doctine",
+    "org_id": 2,
     "date": "2021-04-03T10:00:00+07",
     "duration": 120,
     "instructor_id": 1,
@@ -87,13 +87,13 @@ Content-Type: application/json
 
 ### testing partial post (no broadcast data added)
 
-POST http://localhost:5100/add-meeting
+POST https://cse341proj2.herokuapp.com/add-meeting
 Content-Type: application/json
 
 {
-    "meetingName": "Conference",
+    "meetingName": "Elders Quorum",
     "org_id": "1",
-    "date": "2021-04-03 10:00:00+07",
+    "date": "2021-04-12T10:30:00+07",
     "duration": "120",
     "instructor_id": "1",
     "public": "1",
@@ -103,28 +103,28 @@ Content-Type: application/json
 
 ### ********* Organizations **************
 ### Returns all organzations
-GET http://localhost:5100/orgs
+GET https://cse341proj2.herokuapp.com/orgs
 
 
 ### ********* people **************
 ### all fields filled
-POST http://localhost:5100/add-person
+POST https://cse341proj2.herokuapp.com/add-person
 Content-Type: application/json
 
 { 
-    "fname": "test3_fname",
-    "lname": "test3_lname",
+    "fname": "Peter",
+    "lname": "Sellers",
     "gender": "male",
-    "birthday": "2016-05-01",
+    "birthday": "2000-05-01",
     "mobile": "8014445555",
-    "email": "newtest@email.tv",
-    "access": "member"
+    "email": "peter@sellers.dev",
+    "access": "creator"
 }
 
 
 ### check if bad email is detected
-
-POST http://localhost:5100/add-person
+// should fail validation for email
+POST https://cse341proj2.herokuapp.com/add-person
 Content-Type: application/json
 
 { 
@@ -141,22 +141,22 @@ Content-Type: application/json
 ### ********* Authentication **************
 ###
 
-PUT http://localhost:5100/auth/signup
+PUT https://cse341proj2.herokuapp.com/auth/signup
 Content-Type: application/json
 
 {
-    "fname": "Bob",
+    "fname": "Sally",
     "lname": "Peterson",
-    "gender": "male",
-    "email": "bob@peterson.com",
-    "password": "MyB!gPassword"
+    "gender": "female",
+    "email": "sally@peterson.com",
+    "password": "lkljlier89w"
 }
 
 ###
-POST http://localhost:5100/auth/login
+POST https://cse341proj2.herokuapp.com/auth/login
 Content-Type: application/json
 
 {
-    "email": "bob@peterson.com",
-    "password": "MyB!gPassword"
+    "email": "mary@peterson.com",
+    "password": "lkljlier89w"
 }

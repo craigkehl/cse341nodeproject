@@ -1,5 +1,4 @@
-
-const mainContainer = document.getElementById("load");
+const mainContainer = document.getElementById("main-container");
 
 const getCurMeetingData = () => {
     fetch('/public/meetings/current')
@@ -45,7 +44,7 @@ const getCurMeetingData = () => {
                 </div>
                 </div>
             </div>
-            `;
+            `
         });
         curMeetingList +=`</div></div>`;
         mainContainer.innerHTML = curMeetingList;

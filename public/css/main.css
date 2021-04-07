@@ -1,6 +1,5 @@
 main {
     width: 100%;
-    height: 70vh;
 }
 
 .add-meeting-form,
@@ -57,8 +56,8 @@ div.card {
     background-color: #aa90b5;
     max-width: 500px;
     box-shadow: 4px 4px 8px #c9a0d8;
-    margin-top: 8px;
-}
+    margin: 20px;
+} 
 
 div.card-top {
     max-width: 110%;
@@ -70,6 +69,11 @@ div.card-top {
     grid-template-columns: 1fr 26fr;
     grid-template-rows: 3fr 2fr;
     margin: 0 -10px 0 5px;
+    color: white;
+}
+
+.meeting-name {
+    font-size: 1.2rem;
 }
 
 div.meeting-icon {
@@ -100,9 +104,12 @@ div.details {
 
 div.img-area {
     width: 30%;
+    min-width: 100px;
 }
+
 .img-area img {    
     width: 66%;
+    min-width: 60px;
     height: auto;
     margin: 20px 10% 20px 20%;
 }
@@ -116,4 +123,74 @@ div.img-area {
 
 .meeting-link button {
     height: 40px;
+}
+
+#current-meeting-container {
+    width: 95%;
+    margin: 20px auto;
+    padding: 1rem;
+    background-color: #c7d4fc;
+}
+
+#current-meetings {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    align-content: center;
+    background-color: #dde5fc;
+    justify-content: space-between;
+    box-shadow: 0px 0px 8px #dde5fc;
+}
+
+.top-header {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    justify-content: center;
+    border-bottom: 2px solid lightgrey;
+}
+
+nav {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+    padding: .5rem 1rem;
+    border-bottom: 2px solid lightgrey;
+}
+
+div.h1 {
+    grid-column: 2 / 3;
+    margin: 1rem auto;
+    text-align: center;
+}
+
+.sub-heading {
+    width: 90%;
+    text-align: center;
+    margin: 0 auto;
+}
+.sub-heading {
+    font-size: 1.2rem;
+}
+#login {
+    display: flex;
+    align-content: center;
+}
+
+#login span {
+    display: block;
+    height: 60%;
+    margin: .5rem 2rem;
+    float: right;
+}
+
+#current-meeting-container h2 {
+    margin: 16px 0 0 20px;
+}
+#current-meeting-container p {
+    margin: 8px 0 16px 20px;
+}
+
+h1 {
+    margin-bottom: 0;
 }

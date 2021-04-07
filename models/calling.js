@@ -4,7 +4,7 @@ const db = require('../services/db')
 
 // create calling class
 module.exports = class Calling {
-    constructor(personId, orgId, calling, startDate, releaseDate = 'null') {
+    constructor(personId, orgId, calling, startDate, releaseDate = null) {
         this.personId = personId;
         this.orgId = orgId;
         this.calling = calling;
@@ -16,10 +16,16 @@ module.exports = class Calling {
     save() {
         debugger
         console.log("saving calling")
-        const query = {
+        
+        const query1 = {
             text: 'INSERT INTO church.callings(person_id, org_id, calling, start_date, release_date) VALUES($1, $2, $3, $4, $5);',
             values: [this.personId, this.orgId, this.calling, this.startDate, this.releaseDate]
           }
+        const query2 = {
+            text: 'INSERT INTO church.callings(person_id, org_id, calling, start_date) VALUES($1, $2, $3, $4);',
+            values: [this.personId, this.orgId, this.calling, this.startDate]
+          }
+          const query = (this.releaseDate) ? query1 : query2;
         // promise
         return new Promise ((resolve, reject) => {
             db

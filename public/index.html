@@ -4,46 +4,39 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Temp static page</title>
-
-   <link rel="stylesheet" href="css/main.css">
-
+    <title>Willow Hills Meeting Manager</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-    <main>
-        <h1>Current Public Meetings</h1>
-        <p>Current meetings for public attendence are listed below</p>
-    
-        <div id="current-meetings container">
-            <div class="card">
-                <div class="card-top">
-                    <div class="meeting-icon">
-                        <img href="https://assets.ldscdn.org/72/11/7211c684746358a58db73ef724c1f4efd75aed8d/aba_nigeria_temple_lds.jpeg">
-                    </div>
-                    <div class="meeting-name">Meeting Name</div>
-                    <div class="meeting-date">Sunday, 25 October 2021</div>
-                </div>
-                <div class="card-bottom">
-                    <div class="img-area">
-                        <img src="./images/Christus.webp">
-                    </div>
-                    <div class="details">
-                    <div class="instructor">
-                        <h5>Instructor:</h5>
-                        <span class="instructor-name"></span>                    
-                    </div>
-                    <div class="moderator">
-                        <h5>moderator:</h5>
-                        <span class="moderator-name"></span>                    
-                    </div>
-                    <div class="meeting-link">
-                        <h5>Link:</h5>
-                        <button type="button" onclick="">Watch Now</button>                    
-                    </div>
-                </div>
-                </div>
+    <header>
+        <div class="top-header">
+            <div class="h1">
+                <h1>Willow Hills Ward</h1>
+                <span class="sub-heading">Meeting Manager</span>
             </div>
         </div>
+        <nav>
+            <ul>
+                <li onclick=(getCurMeetingData())>home</li>
+                <li onclick=(loadCallings())>callings</li>
+                
+            </ul>
+            <div id="login">
+                <span class="material-icons-two-tone">
+                    login
+                    </span>
+            </div>
+            
+        </nav>
+
+    </header>
+    <main>
+        <div id="load">
+
+        </div>
+        
+    
     </main>
     <a href="person.html" >handle persons</a>
     <a href="meeting.html" >handle meetings</a>
@@ -63,8 +56,8 @@
 
     </div>
    
-    <script>
-
-    </script>
+    
+    <script src="js/home.js"></script>
+    <script src="js/calling.js"></script>
 </body>
 </html>

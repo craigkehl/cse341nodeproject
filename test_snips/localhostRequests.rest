@@ -5,19 +5,23 @@
 # you can click the "Send Request" link above each request
 # to send a request and receive a response
 
+### ********* Public Meetings **************
+
+GET http://localhost:5100/public/meetings/current
+
+
 ### ********* Broadcasts **************
-GET https://cse341proj2.herokuapp.com/add-broadcast
+GET http://localhost:5100/add-broadcast
 
 ###
-### be sure to run the requests included below 
-### to first get existing ids 
-### and make sure the meeting_id doesn't already have
-### a broadcast tied to it.
-POST https://cse341proj2.herokuapp.com/add-broadcast
+### Before running this request below 
+### get existing meeting ids without a broadcast_id
+### of null from the get meetings request below
+POST http://localhost:5100/add-broadcast
 Content-Type: application/json
 
 {
-    "meeting_id": 12,
+    "meeting_id": 10,
     "moderator_id": 2,
     "provider_id": 2,
     "meetingLink": "sasdfassasdfgasdfk123"
@@ -25,17 +29,18 @@ Content-Type: application/json
 
 ###
 
-GET https://cse341proj2.herokuapp.com/broadcasts
+GET http://localhost:5100/broadcasts
 
 ###
 
 // replace the 2 with the desired broadcast id parameter
-GET https://cse341proj2.herokuapp.com/broadcast/2
+GET http://localhost:5100/broadcast/2
 
 
 ###
 // replace the 11 with the desired broadcast id parameter
-DELETE https://cse341proj2.herokuapp.com/broadcast/11
+// from the broadcasts request above
+DELETE http://localhost:5100/broadcast/28
 
 
 
@@ -43,39 +48,39 @@ DELETE https://cse341proj2.herokuapp.com/broadcast/11
 
 ### ********* Callings **************
 
-GET https://cse341proj2.herokuapp.com/add-calling
+GET http://localhost:5100/add-calling
 
 ###
 
-POST https://cse341proj2.herokuapp.com/add-calling
+POST http://localhost:5100/add-calling
 Content-Type: application/json
 
 {
     "orgId": 27,
     "personId": 8,
     "calling": "calling",
-    "startDate": "2021-03-28T00:00:00+07",
-    "releaseDate": "2023-03-28T00:00:00+07"
+    "startDate": "2021-03-28",
+    "releaseDate": ""
 }
 
 
 ### ********* Meetings **************
 
-GET https://cse341proj2.herokuapp.com/meetings/
+GET http://localhost:5100/meetings/
 
 
 ###
 
-GET https://cse341proj2.herokuapp.com/add-meeting
+GET http://localhost:5100/add-meeting
 
 ###  testing all fields utilized
 
-POST https://cse341proj2.herokuapp.com/add-meeting
+POST http://localhost:5100/add-meeting
 Content-Type: application/json
 
 {
-    "meetingName": "Conference",
-    "org_id": 1,
+    "meetingName": "Gospel Doctine",
+    "org_id": 2,
     "date": "2021-04-03T10:00:00+07",
     "duration": 120,
     "instructor_id": 1,
@@ -87,13 +92,13 @@ Content-Type: application/json
 
 ### testing partial post (no broadcast data added)
 
-POST https://cse341proj2.herokuapp.com/add-meeting
+POST http://localhost:5100/add-meeting
 Content-Type: application/json
 
 {
-    "meetingName": "Conference",
+    "meetingName": "Elders Quorum",
     "org_id": "1",
-    "date": "2021-04-03 10:00:00+07",
+    "date": "2021-04-12T10:30:00+07",
     "duration": "120",
     "instructor_id": "1",
     "public": "1",
@@ -103,28 +108,28 @@ Content-Type: application/json
 
 ### ********* Organizations **************
 ### Returns all organzations
-GET https://cse341proj2.herokuapp.com/orgs
+GET http://localhost:5100/orgs
 
 
 ### ********* people **************
 ### all fields filled
-POST https://cse341proj2.herokuapp.com/add-person
+POST http://localhost:5100/add-person
 Content-Type: application/json
 
 { 
-    "fname": "test3_fname",
-    "lname": "test3_lname",
+    "fname": "Peter",
+    "lname": "Sellers",
     "gender": "male",
-    "birthday": "2016-05-01",
+    "birthday": "2000-05-01",
     "mobile": "8014445555",
-    "email": "newtest@email.tv",
-    "access": "member"
+    "email": "peter@sellers.dev",
+    "access": "creator"
 }
 
 
 ### check if bad email is detected
-
-POST https://cse341proj2.herokuapp.com/add-person
+// should fail validation for email
+POST http://localhost:5100/add-person
 Content-Type: application/json
 
 { 
@@ -145,11 +150,11 @@ PUT http://localhost:5100/auth/signup
 Content-Type: application/json
 
 {
-    "fname": "Bob",
+    "fname": "Mary",
     "lname": "Peterson",
-    "gender": "male",
-    "email": "bob@peterson.com",
-    "password": "MyB!gPassword"
+    "gender": "female",
+    "email": "mary@peterson.com",
+    "password": "lkljlier89w"
 }
 
 ###
@@ -157,6 +162,6 @@ POST http://localhost:5100/auth/login
 Content-Type: application/json
 
 {
-    "email": "bob@peterson.com",
-    "password": "MyB!gPassword"
+    "email": "mary@peterson.com",
+    "password": "lkljlier89w"
 }

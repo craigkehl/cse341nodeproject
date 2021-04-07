@@ -8,6 +8,19 @@ const Organization = require('../models/organization');
 const Calling = require('../models/calling');
 const Broadcast = require('../models/broadcast');
 
+// *** Public Meeting routesn ***
+exports.getCurrentPublicMeetings = (req, res, next) => {
+  Meeting.fetchAllPublicCurrent()
+  .then((meetingList) => {
+    res.status(200).json({ data: meetingList.rows});
+  }) 
+  .catch(err => {
+    res.status(401).json({ 
+      message: "Error: Meetings not retrieved.",
+      data: err });
+  });
+}
+
 // meetings require orgs and people to be scheduled
 exports.getAddMeeting = (req, res, next) => {
   const data = {};

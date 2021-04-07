@@ -68,7 +68,6 @@ exports.postAddCalling = (req, res, next) => {
   const callingName = req.body.calling;
   const startDate = req.body.startDate;
   const releaseDate = req.body.releaseDate;
-  debugger
   const calling = new Calling(personId, orgId, callingName, startDate, releaseDate);
 
   calling.save()

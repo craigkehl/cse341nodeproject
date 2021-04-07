@@ -8,6 +8,7 @@ const PORT = process.env.PORT || 5100;
 const app = express();
 
 const db = require('./services/db');
+const publicRoutes = require('./routes/public');
 const meetingsRoutes = require('./routes/meeting');
 const adminRoutes = require('./routes/admin');
 const authRoutes = require('./routes/auth');
@@ -23,14 +24,7 @@ app.use((req, res, next) => {
     next();
 });
 
-// app.post('/auth/signup', (req, res) => {
-//     const email = req.body.email;
-//     const password = req.body.password;
-//     console.log(email);
-//     console.log(password);
-//     res.status(200).json({message: "Got it"});
-// })
-
+app.use('/public', publicRoutes);
 app.use('/auth', authRoutes);
 app.use(meetingsRoutes);
 app.use(adminRoutes);
