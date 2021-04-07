@@ -205,7 +205,8 @@ nav ul li {
     margin: 0 1rem;
     
 }
-nav ul li:hover {
+nav ul li:hover,
+#access:hover {
     transform: scale(1.1);
     cursor: pointer;
 }
