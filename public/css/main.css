@@ -194,3 +194,12 @@ div.h1 {
 h1 {
     margin-bottom: 0;
 }
+
+nav ul {
+    display: flex;
+    justify-content: flex-start;
+}
+
+nav ul li {
+    list-style-type: none;
+}
