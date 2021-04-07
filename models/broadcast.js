@@ -18,15 +18,14 @@ module.exports = class Broadcast {
           }
         // promise
         return new Promise ((resolve, reject) => {
-            debugger
             db
               .query(query, (err, result) => {
                 if (err) {
                   return reject(err);
                 }
-                console.log(result.rowCount);
-                debugger
-                return resolve(result.rowCount);
+                if (result.rowCount == 1) {
+                    return resolve(result);
+                }
               });
           });
     }

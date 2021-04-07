@@ -22,9 +22,8 @@ module.exports = class Meeting {
         try {
           await client.query('BEGIN');
           const res = await client.query(query);
-
           const query2 = {
-            text: 'INSERT INTO church.meetings_organizations(meeting_id, organization_id) VALUES($1, $2)',
+            text: 'INSERT INTO church.meetings_organizations(meeting_id, organization_id) VALUES($1, $2) RETURNING *',
             values: [res.rows[0].id, this.orgId]
           };
           const res2 = await client.query(query2);

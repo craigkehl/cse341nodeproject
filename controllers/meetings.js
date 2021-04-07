@@ -83,7 +83,8 @@ exports.postAddMeeting = (req, res, next) => {
   const duration = req.body.duration;
   const is_public = req.body.public;
   const orgId = req.body.org_id;
-  console.log(req.body);
+  const meetingLink = req.body.meetingLink;
+  const moderator_id = req.body.moderator_id;
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     console.log(errors);
@@ -95,10 +96,32 @@ exports.postAddMeeting = (req, res, next) => {
  
   const meeting = new Meeting(meetingName, date, duration, is_public, orgId);
   meeting.save()
-  .then(result => {
-    return res.status(201).json({ 
-        message: 'Your meeting has been added.'
-    }); 
+  .then(meeting => {
+    if (moderator_id) {
+      const b = new Broadcast(meeting.rows[0].meeting_id, moderator_id, meetingLink, 1);
+      console.log(b);
+      b.save()
+      .then(broadcast => {
+        if(broadcast) {
+          return res.status(201).json({ 
+            message: 'Your meeting has been added.',
+            data: broadcast.rows[0]
+          }); 
+        } else {
+          return res.status(201).json({ 
+            message: 'Your meeting has been added but not the broadcast.',
+            data: meeting.rows[0]
+        }); 
+        }
+      })
+      .catch(err => {
+        console.error(err);
+        return res.status(401).json({
+          message: 'Your meeting was not added.',
+          error: err
+        });    
+      });
+    }
   })
   .catch(err => {
     console.error(err);
