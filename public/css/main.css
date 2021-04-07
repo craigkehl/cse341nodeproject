@@ -2,8 +2,8 @@ main {
     width: 100%;
 }
 
-.add-meeting-form h1,
-.add-person-form  h1 {
+.add-meeting-container h1,
+.add-person-container  h1 {
     padding: 0 1rem;
 }
 
