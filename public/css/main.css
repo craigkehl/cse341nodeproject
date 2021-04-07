@@ -2,11 +2,18 @@ main {
     width: 100%;
 }
 
+.add-meeting-form h1,
+.add-person-form  h1 {
+    padding: 0 1rem;
+}
+
 .add-meeting-form,
 .add-person-form  {
     display: flex;
     flex-wrap: wrap;
     align-items: baseline;
+    justify-content:space-between;
+    padding: 0 1rem;
 }
 
 label {
@@ -39,7 +46,7 @@ input[type="radio"] {
     height: fit-content;
     align-self: center;
     justify-self: center;
-}
+ 
 
 .add-meeting-container,
 .add-person-container {
