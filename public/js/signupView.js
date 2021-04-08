@@ -42,7 +42,6 @@ const signup = () => {
         password: password
     };
     console.log(data);
-    debugger
     fetch('https://cse341proj2.herokuapp.com/auth/signup', {
         method: 'POST',
         headers: {
