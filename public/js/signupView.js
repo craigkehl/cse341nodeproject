@@ -42,7 +42,8 @@ const signup = () => {
         password: password
     };
     console.log(data);
-    fetch('/auth/signup', {
+    debugger
+    fetch('https://cse341proj2.herokuapp.com/auth/signup', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -55,6 +56,6 @@ const signup = () => {
         document.getElementById('signupMessage').innerHTML=data.message;
         })
         .catch((error) => {
-        console.error('Error:', error);
+            console.error(error);
         });
 }

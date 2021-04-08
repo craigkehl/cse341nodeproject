@@ -148,7 +148,7 @@ Content-Type: application/json
     "fname": "Sally",
     "lname": "Peterson",
     "gender": "female",
-    "email": "sally@peterson.com",
+    "email": "tally@peterson.com",
     "password": "lkljlier89w"
 }
 
