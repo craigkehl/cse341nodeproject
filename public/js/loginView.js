@@ -11,9 +11,11 @@ const loginView =`<div class="login-container">
     </label>
 </div>
 <button type="button" onclick="login()">Login</button>
+<br>
+<h3>Need to Sign Up first?</h3>
+<button onclick="loadSignup()">Sign Up</button
 </div>
-,<h3>Need to Sign Up first?</h3>
-<button onclick="loadSignup()">Sign Up</button`;
+`;
 
 const loadLogin = () => loginPage.innerHTML=loginView;
 
