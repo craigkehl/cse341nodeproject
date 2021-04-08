@@ -24,7 +24,7 @@ const login = () => {
         email: email,
         password: password
     };
-    fetch('/auth/login', {
+    fetch('https://cse341proj2.herokuapp.com/auth/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
