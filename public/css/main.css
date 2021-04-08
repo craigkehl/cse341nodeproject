@@ -231,7 +231,8 @@ nav ul li:hover,
     width:fit-content;
     height:fit-content;
     text-decoration: none;
-    
+    color: black;
+    padding: .5rem;
 }
 #load {
     display: flex;
