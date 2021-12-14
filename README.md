@@ -1,4 +1,4 @@
-#Project proposal - Stake and ward website to help facilitate Online meetings
+#Project proposal - <a href="https://cse341proj2.herokuapp.com/">Stake and ward website</a> to help facilitate Online meetings
 
 <h2>Summary</h2>
 <p>Stakes and wards have difficulty managing meetings. Church leadership has contracted with Zoom to provide all of the wards in my stake with Zoom account to facilitate the requirements for their large meetings, such as sacrament meetings. Numerous smaller meetings are occurring at increasing rates. Wards that have tried to use their ward account to handle these meetings have run into scheduling issues, security issues, and preferences being altered for one meeting that negatively impact another meeting. Members are able to sigh-up for free accounts from Zoom with some limitations, yet they are sufficient for small meeting’s needs. However, meeting information isn't always distributed or easily retrieved by the appropriate people. This site could provide one consistent URL to help facilitate online meetings.</p>
